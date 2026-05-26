@@ -2,7 +2,7 @@
 
 Use this template when dispatching a plan document reviewer subagent.
 
-**Purpose:** Verify the plan is complete, matches the spec, and has proper task decomposition.
+**Purpose:** Verify the plan is complete, matches the spec, preserves developer judgment, and has actionable task decomposition.
 
 **Dispatch after:** The complete plan is written.
 
@@ -11,6 +11,8 @@ Task tool (general-purpose):
   description: "Review plan document"
   prompt: |
     You are a plan document reviewer. Verify this plan is complete and ready for implementation.
+    Plans may be adaptive: they can define goals, boundaries, likely touchpoints,
+    risks, verification, and stop conditions without fixed paths or complete code.
 
     **Plan to review:** [PLAN_FILE_PATH]
     **Spec for reference:** [SPEC_FILE_PATH]
@@ -19,10 +21,12 @@ Task tool (general-purpose):
 
     | Category | What to Look For |
     |----------|------------------|
-    | Completeness | TODOs, placeholders, incomplete tasks, missing steps |
+    | Completeness | TODOs, placeholders, incomplete tasks, missing intent or verification |
     | Spec Alignment | Plan covers spec requirements, no major scope creep |
-    | Task Decomposition | Tasks have clear boundaries, steps are actionable |
-    | Buildability | Could an engineer follow this plan without getting stuck? |
+    | Task Decomposition | Tasks have clear outcomes, boundaries, likely touchpoints, and stop conditions |
+    | Buildability | Could an engineer start safely, inspect live code, and adapt without guessing? |
+    | Rigidity | Does the plan avoid locking guessed paths, prewriting unknown code, or hardcoding commit messages? |
+    | Verification | Does verification match the real risks instead of forcing low-value mock tests? |
 
     ## Calibration
 
@@ -31,7 +35,8 @@ Task tool (general-purpose):
     Minor wording, stylistic preferences, and "nice to have" suggestions are not.
 
     Approve unless there are serious gaps — missing requirements from the spec,
-    contradictory steps, placeholder content, or tasks so vague they can't be acted on.
+    contradictory steps, placeholder content, fake precision, locked-in guessed paths,
+    missing verification for high-risk behavior, or tasks so vague they can't be acted on.
 
     ## Output Format
 

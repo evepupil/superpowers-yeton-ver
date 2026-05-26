@@ -7,11 +7,11 @@ description: Use when you have a spec or requirements for a multi-step task, bef
 
 ## Overview
 
-Write comprehensive implementation plans assuming the engineer has zero context for our codebase and questionable taste. Document everything they need to know: which files to touch for each task, code, testing, docs they might need to check, how to test it. Give them the whole plan as bite-sized tasks. DRY. YAGNI. TDD. Frequent commits.
+Write an adaptive engineering plan that preserves developer judgment while making the work safe to start. The plan fixes the goal, boundaries, risks, and verification strategy. It does **not** pre-write implementation code, lock in new directory structures, or choose commit messages before the code exists.
 
-Assume they are a skilled developer, but know almost nothing about our toolset or problem domain. Assume they don't know good test design very well.
+The default output is an **Adaptive Engineering Plan**. Use a **Mechanical Handoff Plan** only when the human explicitly asks for a low-context agent handoff, a step-by-step implementation script, or complete task-by-task code.
 
-**Announce at start:** "I'm using the writing-plans skill to create the implementation plan."
+**Announce at start:** "I'm using the writing-plans skill to create an adaptive engineering plan."
 
 **Context:** If working in an isolated worktree, it should have been created via the `superpowers:using-git-worktrees` skill at execution time.
 
@@ -20,126 +20,176 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 
 ## Scope Check
 
-If the spec covers multiple independent subsystems, it should have been broken into sub-project specs during brainstorming. If it wasn't, suggest breaking this into separate plans — one per subsystem. Each plan should produce working, testable software on its own.
+If the spec covers multiple independent subsystems, it should have been broken into sub-project specs during brainstorming. If it wasn't, suggest breaking this into separate plans, one per subsystem. Each plan should produce working, testable software on its own.
 
-## File Structure
+## Planning Mode
 
-Before defining tasks, map out which files will be created or modified and what each one is responsible for. This is where decomposition decisions get locked in.
+### Default: Adaptive Engineering Plan
 
-- Design units with clear boundaries and well-defined interfaces. Each file should have one clear responsibility.
-- You reason best about code you can hold in context at once, and your edits are more reliable when files are focused. Prefer smaller, focused files over large ones that do too much.
-- Files that change together should live together. Split by responsibility, not by technical layer.
-- In existing codebases, follow established patterns. If the codebase uses large files, don't unilaterally restructure - but if a file you're modifying has grown unwieldy, including a split in the plan is reasonable.
+Use this for normal software work, especially existing codebases, architecture still being discovered, integration-heavy tasks, and work led by a human developer.
 
-This structure informs the task decomposition. Each task should produce self-contained changes that make sense independently.
+The plan should answer:
+- What are we trying to change?
+- What is explicitly out of scope?
+- What code facts do we already know?
+- Where are the likely touchpoints?
+- What risks could make this fail?
+- How will we verify the result?
+- When should the implementer stop and revisit assumptions?
 
-## Bite-Sized Task Granularity
+### Opt-in: Mechanical Handoff Plan
 
-**Each step is one action (2-5 minutes):**
-- "Write the failing test" - step
-- "Run it to make sure it fails" - step
-- "Implement the minimal code to make the test pass" - step
-- "Run the tests and make sure they pass" - step
-- "Commit" - step
+Use this only when the human explicitly asks for mechanical delegation to low-context workers. In that mode, the plan may include exact paths, detailed steps, and example code, but it must still avoid pretending that unknown code context is known.
 
-## Plan Document Header
+## Adaptive Plan Header
 
-**Every plan MUST start with this header:**
+Every adaptive plan MUST start with this header:
 
 ```markdown
-# [Feature Name] Implementation Plan
+# [Feature Name] Engineering Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** This is an adaptive plan. First inspect the live codebase, then choose final paths, abstractions, and commit messages from the actual diff. Do not treat likely touchpoints as locked implementation instructions.
 
-**Goal:** [One sentence describing what this builds]
+**Goal:** [One sentence describing the intended behavior or outcome]
 
-**Architecture:** [2-3 sentences about approach]
+**Non-Goals:** [What this plan deliberately does not change]
 
-**Tech Stack:** [Key technologies/libraries]
+**Planning Mode:** Adaptive Engineering Plan
 
 ---
 ```
 
-## Task Structure
+## Required Sections
 
-````markdown
-### Task N: [Component Name]
+### Goal and Boundaries
 
-**Files:**
-- Create: `exact/path/to/file.py`
-- Modify: `exact/path/to/existing.py:123-145`
-- Test: `tests/exact/path/to/test.py`
+State the user-visible outcome, the system boundary, and the constraints that matter. Boundaries are more important than implementation guesses.
 
-- [ ] **Step 1: Write the failing test**
+Include:
+- In scope
+- Out of scope
+- Compatibility or migration constraints
+- Assumptions that need confirmation during implementation
 
-```python
-def test_specific_behavior():
-    result = function(input)
-    assert result == expected
+### Known Context
+
+List facts already verified from the repository, docs, tests, runtime behavior, or user input. Do not list guesses as facts.
+
+Good:
+- "`src/routes/chat.ts` currently owns the SSE endpoint."
+- "Existing tests use Vitest and MSW."
+
+Bad:
+- "Create `src/services/newService.ts`" when that structure has not been validated.
+- "Use Redis key `foo:bar`" before the storage model is confirmed.
+
+### Likely Touchpoints
+
+Identify probable files, modules, APIs, or directories to inspect first. These are starting points, not locked paths.
+
+Rules:
+- Existing files may be listed as confirmed touchpoints when already inspected.
+- New files must be described as candidate locations or naming constraints, not fixed paths.
+- Do not design a new directory tree before reading the surrounding code patterns.
+- If path choice depends on code discovered during implementation, say that explicitly.
+
+### Risks and Open Questions
+
+Call out the places where static planning is weak:
+- Async or concurrent behavior
+- Streaming, middleware, lifecycle, or transaction boundaries
+- Data compatibility and migrations
+- Auth, billing, privacy, or permission decisions
+- External service contracts
+- Performance, caching, and invalidation
+- Test blind spots caused by excessive mocking
+
+Open questions should be real blockers or implementation checkpoints, not filler.
+
+### Verification Strategy
+
+Use risk-driven verification. Do not force the same TDD template onto every change.
+
+Required guidance:
+- Business rules, parsers, state machines, concurrency, protocols, permissions, billing, and migrations need targeted tests or high-signal integration coverage.
+- Glue code, config changes, copy changes, and simple wiring may be verified with lint, typecheck, smoke tests, or manual checks.
+- Prefer tests that exercise real behavior. Avoid mocking trivial helpers just to satisfy a process.
+- Include the commands or probes that are already known. If exact commands depend on project discovery, say what to find first.
+
+### Execution Notes
+
+Tell the implementer how to use the plan:
+- Inspect live code before finalizing paths or abstractions.
+- Let existing project patterns choose file placement.
+- Update the plan or explain the deviation when an assumption is wrong.
+- Generate commit messages from the actual diff at commit time, using the project's standard format such as Conventional Commits when applicable.
+- Stop and ask when a decision changes public behavior, data shape, security, billing, or compatibility.
+
+## Adaptive Task Shape
+
+Tasks should be outcome-oriented, not line-by-line scripts:
+
+```markdown
+### Task N: [Outcome]
+
+**Intent:** [What should be true after this task]
+
+**Likely touchpoints:** [Existing files/modules to inspect first; candidate locations only for new files]
+
+**Constraints:** [Patterns, compatibility, or user decisions that must be preserved]
+
+**Risks:** [Task-specific risks]
+
+**Verification:** [Targeted tests, commands, probes, or manual checks]
+
+**Stop if:** [Signals that the plan assumption is wrong]
 ```
 
-- [ ] **Step 2: Run test to verify it fails**
+Keep tasks small enough to review, but not so small that the plan becomes a checklist of mechanical keystrokes. A task may involve reading, design adjustment, implementation, and verification when those steps are tightly coupled.
 
-Run: `pytest tests/path/test.py::test_name -v`
-Expected: FAIL with "function not defined"
+## Mechanical Handoff Rules
 
-- [ ] **Step 3: Write minimal implementation**
+If the human explicitly requested a mechanical handoff plan:
+- Say that you are switching to Mechanical Handoff mode.
+- Include exact paths only after verifying they exist or clearly marking them as new planned files.
+- Include code only where it reduces ambiguity and is grounded in known project patterns.
+- Do not prewrite commit messages. State the commit boundary and require the implementer to generate the final message from the actual diff.
+- Include a "Replan Trigger" for each task so agents stop when the live code contradicts the plan.
 
-```python
-def function(input):
-    return expected
-```
+## Plan Failures
 
-- [ ] **Step 4: Run test to verify it passes**
-
-Run: `pytest tests/path/test.py::test_name -v`
-Expected: PASS
-
-- [ ] **Step 5: Commit**
-
-```bash
-git add tests/path/test.py src/path/file.py
-git commit -m "feat: add specific feature"
-```
-````
-
-## No Placeholders
-
-Every step must contain the actual content an engineer needs. These are **plan failures** — never write them:
-- "TBD", "TODO", "implement later", "fill in details"
-- "Add appropriate error handling" / "add validation" / "handle edge cases"
-- "Write tests for the above" (without actual test code)
-- "Similar to Task N" (repeat the code — the engineer may be reading tasks out of order)
-- Steps that describe what to do without showing how (code blocks required for code steps)
-- References to types, functions, or methods not defined in any task
-
-## Remember
-- Exact file paths always
-- Complete code in every step — if a step changes code, show the code
-- Exact commands with expected output
-- DRY, YAGNI, TDD, frequent commits
+These are failures in both modes:
+- Treating guessed paths as facts
+- Locking a new directory structure before inspecting local patterns
+- Prewriting production code for unknown context
+- Requiring low-value mock tests for trivial helpers
+- Omitting verification for high-risk behavior
+- Forcing a stale plan after implementation disproves an assumption
+- Hardcoding a commit message before seeing the final diff
+- Writing vague placeholders such as "TBD", "TODO", "handle edge cases", or "add appropriate tests"
 
 ## Self-Review
 
-After writing the complete plan, look at the spec with fresh eyes and check the plan against it. This is a checklist you run yourself — not a subagent dispatch.
+After writing the plan, review it with fresh eyes:
 
-**1. Spec coverage:** Skim each section/requirement in the spec. Can you point to a task that implements it? List any gaps.
+1. **Spec coverage:** Can every requirement be mapped to a goal, boundary, task, or verification item?
+2. **Fact vs guess:** Are known facts separated from likely touchpoints and assumptions?
+3. **Path rigidity:** Did you avoid locking new files/directories unless the structure is already confirmed?
+4. **Risk coverage:** Are the riskiest behaviors tied to concrete verification?
+5. **Commit discipline:** Did you avoid prewriting commit messages and instead define commit boundaries?
+6. **Replan triggers:** Does the plan tell implementers when to stop and revise assumptions?
 
-**2. Placeholder scan:** Search your plan for red flags — any of the patterns from the "No Placeholders" section above. Fix them.
-
-**3. Type consistency:** Do the types, method signatures, and property names you used in later tasks match what you defined in earlier tasks? A function called `clearLayers()` in Task 3 but `clearFullLayers()` in Task 7 is a bug.
-
-If you find issues, fix them inline. No need to re-review — just fix and move on. If you find a spec requirement with no task, add the task.
+Fix issues inline before handing off.
 
 ## Execution Handoff
 
-After saving the plan, offer execution choice:
+After saving the plan, offer execution choices:
 
 **"Plan complete and saved to `docs/superpowers/plans/<filename>.md`. Two execution options:**
 
-**1. Subagent-Driven (recommended)** - I dispatch a fresh subagent per task, review between tasks, fast iteration
+**1. Subagent-Driven** - I coordinate task execution with fresh subagents, review between tasks, and replan when live code contradicts the plan
 
-**2. Inline Execution** - Execute tasks in this session using executing-plans, batch execution with checkpoints
+**2. Inline Execution** - Execute in this session using executing-plans, with checkpoints when assumptions change
 
 **Which approach?"**
 

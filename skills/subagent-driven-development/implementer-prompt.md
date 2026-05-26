@@ -10,7 +10,7 @@ Task tool (general-purpose):
 
     ## Task Description
 
-    [FULL TEXT of task from plan - paste it here, don't make subagent read file]
+    [FULL TEXT of task from plan - paste it here, don't make subagent read file. Include intent, likely touchpoints, constraints, risks, verification, and stop conditions when present.]
 
     ## Context
 
@@ -22,6 +22,7 @@ Task tool (general-purpose):
     - The requirements or acceptance criteria
     - The approach or implementation strategy
     - Dependencies or assumptions
+    - Whether likely touchpoints are still correct after inspecting live code
     - Anything unclear in the task description
 
     **Ask them now.** Raise any concerns before starting work.
@@ -29,12 +30,13 @@ Task tool (general-purpose):
     ## Your Job
 
     Once you're clear on requirements:
-    1. Implement exactly what the task specifies
-    2. Write tests (following TDD if task says to)
-    3. Verify implementation works
-    4. Commit your work
-    5. Self-review (see below)
-    6. Report back
+    1. Inspect the live codebase around the likely touchpoints
+    2. Confirm or adjust final paths and abstractions based on existing patterns
+    3. Implement the task intent within the stated boundaries
+    4. Verify using the plan's risk-driven verification guidance
+    5. Commit your work with a message generated from the actual diff and project convention
+    6. Self-review (see below)
+    7. Report back
 
     Work from: [directory]
 
@@ -45,10 +47,12 @@ Task tool (general-purpose):
 
     You reason best about code you can hold in context at once, and your edits are more
     reliable when files are focused. Keep this in mind:
-    - Follow the file structure defined in the plan
+    - Follow confirmed file structure from the plan when it exists
+    - Treat likely touchpoints in adaptive plans as starting points, not locked paths
     - Each file should have one clear responsibility with a well-defined interface
+    - Let existing project patterns choose where new code belongs
     - If a file you're creating is growing beyond the plan's intent, stop and report
-      it as DONE_WITH_CONCERNS — don't split files on your own without plan guidance
+      it as DONE_WITH_CONCERNS
     - If an existing file you're modifying is already large or tangled, work carefully
       and note it as a concern in your report
     - In existing codebases, follow established patterns. Improve code you're touching
@@ -64,6 +68,8 @@ Task tool (general-purpose):
     - You need to understand code beyond what was provided and can't find clarity
     - You feel uncertain about whether your approach is correct
     - The task involves restructuring existing code in ways the plan didn't anticipate
+    - Live code contradicts a plan assumption and adapting would change public behavior,
+      data shape, security, billing, or compatibility
     - You've been reading file after file trying to understand the system without progress
 
     **How to escalate:** Report back with status BLOCKED or NEEDS_CONTEXT. Describe
@@ -92,8 +98,8 @@ Task tool (general-purpose):
 
     **Testing:**
     - Do tests actually verify behavior (not just mock behavior)?
-    - Did I follow TDD if required?
-    - Are tests comprehensive?
+    - Did I use the verification strategy appropriate to the task's risk?
+    - Did I avoid low-value mocks that only test test doubles?
 
     If you find issues during self-review, fix them now before reporting.
 
@@ -102,8 +108,10 @@ Task tool (general-purpose):
     When done, report:
     - **Status:** DONE | DONE_WITH_CONCERNS | BLOCKED | NEEDS_CONTEXT
     - What you implemented (or what you attempted, if blocked)
+    - Whether likely touchpoints were confirmed or changed
     - What you tested and test results
     - Files changed
+    - Commit message used
     - Self-review findings (if any)
     - Any issues or concerns
 
