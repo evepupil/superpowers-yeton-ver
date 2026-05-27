@@ -4,7 +4,16 @@ Complete guide for using Superpowers with [OpenCode.ai](https://opencode.ai).
 
 ## Installation
 
-Add superpowers to the `plugin` array in your `opencode.json` (global or project-level):
+OpenCode installs Superpowers from the `plugin` array in `opencode.json`.
+
+### Manual install
+
+Edit your OpenCode config file:
+
+- Windows: `%USERPROFILE%\.config\opencode\opencode.json`
+- macOS/Linux: `~/.config/opencode/opencode.json`
+
+Add or update the top-level `plugin` array:
 
 ```json
 {
@@ -12,8 +21,7 @@ Add superpowers to the `plugin` array in your `opencode.json` (global or project
 }
 ```
 
-If you already have the official Superpowers plugin installed, replace the
-official entry instead of adding a second one:
+If you already have the official Superpowers plugin installed, replace its entry:
 
 ```json
 {
@@ -30,6 +38,25 @@ becomes:
 ```
 
 Keep only one `superpowers` plugin entry enabled.
+
+### Prompt install
+
+Paste this into OpenCode and let it update its own config:
+
+```text
+请帮我安装 Superpowers Yeton 版 OpenCode 插件。
+
+要求：
+1. 找到或创建 OpenCode 全局配置文件：
+   - Windows: %USERPROFILE%\.config\opencode\opencode.json
+   - macOS/Linux: ~/.config/opencode/opencode.json
+2. 保留配置文件里已有的其他配置。
+3. 在顶层 plugin 数组中安装：
+   superpowers@git+https://github.com/evepupil/superpowers-yeton-ver.git
+4. 如果已经存在官方 superpowers 插件源，例如 github.com/obra/superpowers，请替换成上面的 Yeton 版源。
+5. 确保最终只保留一个 superpowers 插件条目。
+6. 修改完成后告诉我需要重启 OpenCode，并说明如何验证是否安装成功。
+```
 
 Restart OpenCode. The plugin installs through OpenCode's plugin manager and
 registers all skills.
