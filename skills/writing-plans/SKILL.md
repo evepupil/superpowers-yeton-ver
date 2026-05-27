@@ -18,6 +18,26 @@ The default output is an **Adaptive Engineering Plan**. Use a **Mechanical Hando
 **Save plans to:** `docs/superpowers/plans/YYYY-MM-DD-<feature-name>.md`
 - (User preferences for plan location override this default)
 
+## AI Guidance Check
+
+Before writing an implementation plan, check whether the repository has project-level AI coding guidance:
+- `AGENTS.md`
+- `CLAUDE.md`
+- `GEMINI.md`
+- `.cursor/rules/*.mdc`
+- `.github/copilot-instructions.md`
+- other project-level AI instruction files for the active coding tool
+
+If no guidance file exists, do not write one automatically. Tell the human that the project has no AI coding guidance file and that adding one before implementation is recommended for AI coding best practice. Keep this advisory short and non-blocking:
+
+```text
+I don't see a project-level AI coding guidance file for this repository. For AI-assisted development, adding one before implementation usually improves consistency around verification commands, tests, commit messages, and AI pre-commit review.
+
+I can add concise guidance first for the active AI coding tool, such as `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, Cursor rules, or Copilot instructions. It would cover toolchain checks, optional formatting strategy, test requirements, Conventional Commits, and staged-diff review. Confirm if you want me to add it before I write the implementation plan.
+```
+
+If the human confirms, use `superpowers:creating-agents-guidance` before writing the plan. If the human declines or wants to continue, proceed with the plan and note the absence as a planning risk only when relevant.
+
 ## Scope Check
 
 If the spec covers multiple independent subsystems, it should have been broken into sub-project specs during brainstorming. If it wasn't, suggest breaking this into separate plans, one per subsystem. Each plan should produce working, testable software on its own.

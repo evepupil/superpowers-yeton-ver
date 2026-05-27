@@ -171,6 +171,7 @@ copilot plugin install github:evepupil/superpowers-yeton-ver
 - **subagent-driven-development** - Fast iteration with two-stage review (spec compliance, then code quality)
 
 **Meta**
+- **creating-agents-guidance** - Create or complete project-level AI coding guidance files
 - **writing-skills** - Create new skills following best practices (includes testing methodology)
 - **using-superpowers** - Introduction to the skills system
 
