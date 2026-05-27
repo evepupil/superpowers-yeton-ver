@@ -1,0 +1,6 @@
+interface:
+  display_name: "QA 测试工作流"
+  short_description: "按阶段调度需求分析、测试点设计、接口测试和风险评审"
+  default_prompt: "Use $qa-testing-workflow to coordinate a staged QA workflow with user confirmation before every next phase."
+policy:
+  allow_implicit_invocation: true

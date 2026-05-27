@@ -1,0 +1,6 @@
+interface:
+  display_name: "QA 需求分析"
+  short_description: "把原型、模糊需求和说明材料整理成可测试验收内容"
+  default_prompt: "Use $qa-requirement-analysis to convert prototypes and unclear requirements into testable acceptance materials."
+policy:
+  allow_implicit_invocation: true

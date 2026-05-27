@@ -176,6 +176,13 @@ already use it in another harness.
 **Testing**
 - **test-driven-development** - RED-GREEN-REFACTOR cycle (includes testing anti-patterns reference)
 
+**QA Testing**
+- **qa-testing-workflow** - Staged QA workflow coordination with confirmation gates
+- **qa-requirement-analysis** - Convert requirements and prototypes into testable QA materials
+- **qa-test-design** - Business-oriented test point design
+- **qa-api-test-design** - Optional API test design when code or API docs are available
+- **qa-risk-review** - QA-focused review of code changes and test risk
+
 **Debugging**
 - **systematic-debugging** - 4-phase root cause process (includes root-cause-tracing, defense-in-depth, condition-based-waiting techniques)
 - **verification-before-completion** - Ensure it's actually fixed

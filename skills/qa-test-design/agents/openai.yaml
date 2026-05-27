@@ -1,0 +1,6 @@
+interface:
+  display_name: "QA 测试点设计"
+  short_description: "从业务场景拆解测试点、风险范围、冒烟和回归重点"
+  default_prompt: "Use $qa-test-design to produce concise business-oriented test points rather than long detailed test cases."
+policy:
+  allow_implicit_invocation: true
