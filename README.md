@@ -32,6 +32,23 @@ Thanks!
 
 Installation differs by harness. If you use more than one, install Superpowers separately for each one.
 
+### Replacing the Official Superpowers Plugin
+
+This fork keeps the plugin name `superpowers`, so install it as a replacement
+for the official package. Do not keep both the official `obra/superpowers`
+plugin and this fork enabled in the same harness.
+
+Before installing this fork:
+
+1. Remove or disable any existing official `superpowers` plugin in the current
+   harness.
+2. If the harness uses a config file, replace any `obra/superpowers` source with
+   `evepupil/superpowers-yeton-ver` instead of adding a second `superpowers`
+   entry.
+3. Restart the harness after installation.
+4. Verify the fork loaded by checking for fork-specific skills such as
+   `creating-agents-guidance`, `qa-testing-workflow`, or `qa-risk-review`.
+
 ### Claude Code
 
 Install this fork directly from GitHub:

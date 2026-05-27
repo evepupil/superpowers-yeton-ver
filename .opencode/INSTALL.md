@@ -14,10 +14,30 @@ Add superpowers to the `plugin` array in your `opencode.json` (global or project
 }
 ```
 
+If you already have the official Superpowers plugin installed, replace the
+official entry instead of adding a second one:
+
+```json
+{
+  "plugin": ["superpowers@git+https://github.com/obra/superpowers.git"]
+}
+```
+
+becomes:
+
+```json
+{
+  "plugin": ["superpowers@git+https://github.com/evepupil/superpowers-yeton-ver.git"]
+}
+```
+
+Keep only one `superpowers` plugin entry enabled.
+
 Restart OpenCode. The plugin installs through OpenCode's plugin manager and
 registers all skills.
 
-Verify by asking: "Tell me about your superpowers"
+Verify by asking OpenCode to list skills and checking for fork-specific skills
+such as `creating-agents-guidance`, `qa-testing-workflow`, or `qa-risk-review`.
 
 OpenCode uses its own plugin install. If you also use Claude Code, Codex, or
 another harness, install Superpowers separately for each one.

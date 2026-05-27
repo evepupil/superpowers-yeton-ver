@@ -8,14 +8,34 @@ Add superpowers to the `plugin` array in your `opencode.json` (global or project
 
 ```json
 {
+  "plugin": ["superpowers@git+https://github.com/evepupil/superpowers-yeton-ver.git"]
+}
+```
+
+If you already have the official Superpowers plugin installed, replace the
+official entry instead of adding a second one:
+
+```json
+{
   "plugin": ["superpowers@git+https://github.com/obra/superpowers.git"]
 }
 ```
 
+becomes:
+
+```json
+{
+  "plugin": ["superpowers@git+https://github.com/evepupil/superpowers-yeton-ver.git"]
+}
+```
+
+Keep only one `superpowers` plugin entry enabled.
+
 Restart OpenCode. The plugin installs through OpenCode's plugin manager and
 registers all skills.
 
-Verify by asking: "Tell me about your superpowers"
+Verify by asking OpenCode to list skills and checking for fork-specific skills
+such as `creating-agents-guidance`, `qa-testing-workflow`, or `qa-risk-review`.
 
 OpenCode uses its own plugin install. If you also use Claude Code, Codex, or
 another harness, install Superpowers separately for each one.
@@ -91,7 +111,7 @@ To pin a specific version, use a branch or tag:
 
 ```json
 {
-  "plugin": ["superpowers@git+https://github.com/obra/superpowers.git#v5.0.3"]
+  "plugin": ["superpowers@git+https://github.com/evepupil/superpowers-yeton-ver.git#v5.1.0"]
 }
 ```
 
@@ -128,7 +148,7 @@ the plugin, try installing with system npm and pointing OpenCode at the local
 package:
 
 ```powershell
-npm install superpowers@git+https://github.com/obra/superpowers.git --prefix "$HOME\.config\opencode"
+npm install superpowers@git+https://github.com/evepupil/superpowers-yeton-ver.git --prefix "$HOME\.config\opencode"
 ```
 
 Then use the installed package path in `opencode.json`:
@@ -152,6 +172,6 @@ Then use the installed package path in `opencode.json`:
 
 ## Getting Help
 
-- Report issues: https://github.com/obra/superpowers/issues
-- Main documentation: https://github.com/obra/superpowers
+- Report issues: https://github.com/evepupil/superpowers-yeton-ver/issues
+- Main documentation: https://github.com/evepupil/superpowers-yeton-ver
 - OpenCode docs: https://opencode.ai/docs/
