@@ -34,35 +34,15 @@ Installation differs by harness. If you use more than one, install Superpowers s
 
 ### Claude Code
 
-Superpowers is available via the [official Claude plugin marketplace](https://claude.com/plugins/superpowers)
+Install this fork directly from GitHub:
 
-#### Official Marketplace
-
-- Install the plugin from Anthropic's official marketplace:
-
-  ```bash
-  /plugin install superpowers@claude-plugins-official
-  ```
-
-#### Superpowers Marketplace
-
-The Superpowers marketplace provides Superpowers and some other related plugins for Claude Code.
-
-- Register the marketplace:
-
-  ```bash
-  /plugin marketplace add obra/superpowers-marketplace
-  ```
-
-- Install the plugin from this marketplace:
-
-  ```bash
-  /plugin install superpowers@superpowers-marketplace
-  ```
+```bash
+/plugin install github:evepupil/superpowers-yeton-ver
+```
 
 ### Codex CLI
 
-Superpowers is available via the [official Codex plugin marketplace](https://github.com/openai/plugins).
+Install this fork from its GitHub repository.
 
 - Open the plugin search interface:
 
@@ -70,28 +50,28 @@ Superpowers is available via the [official Codex plugin marketplace](https://git
   /plugins
   ```
 
-- Search for Superpowers:
+- Add the GitHub repository:
 
   ```bash
-  superpowers
+  https://github.com/evepupil/superpowers-yeton-ver
   ```
 
 - Select `Install Plugin`.
 
 ### Codex App
 
-Superpowers is available via the [official Codex plugin marketplace](https://github.com/openai/plugins).
+Install this fork from its GitHub repository.
 
 - In the Codex app, click on Plugins in the sidebar.
-- You should see `Superpowers` in the Coding section.
-- Click the `+` next to Superpowers and follow the prompts.
+- Add or install from `https://github.com/evepupil/superpowers-yeton-ver`.
+- Follow the prompts.
 
 ### Factory Droid
 
 - Register the marketplace:
 
   ```bash
-  droid plugin marketplace add https://github.com/obra/superpowers
+  droid plugin marketplace add https://github.com/evepupil/superpowers-yeton-ver
   ```
 
 - Install the plugin:
@@ -105,7 +85,7 @@ Superpowers is available via the [official Codex plugin marketplace](https://git
 - Install the extension:
 
   ```bash
-  gemini extensions install https://github.com/obra/superpowers
+  gemini extensions install https://github.com/evepupil/superpowers-yeton-ver
   ```
 
 - Update later:
@@ -122,34 +102,26 @@ already use it in another harness.
 - Tell OpenCode:
 
   ```
-  Fetch and follow instructions from https://raw.githubusercontent.com/obra/superpowers/refs/heads/main/.opencode/INSTALL.md
+  Fetch and follow instructions from https://raw.githubusercontent.com/evepupil/superpowers-yeton-ver/refs/heads/main/.opencode/INSTALL.md
   ```
 
 - Detailed docs: [docs/README.opencode.md](docs/README.opencode.md)
 
 ### Cursor
 
-- In Cursor Agent chat, install from marketplace:
+- In Cursor Agent chat, install this fork directly from GitHub:
 
   ```text
-  /add-plugin superpowers
+  /add-plugin https://github.com/evepupil/superpowers-yeton-ver
   ```
-
-- Or search for "superpowers" in the plugin marketplace.
 
 ### GitHub Copilot CLI
 
-- Register the marketplace:
+Install this fork directly from GitHub:
 
-  ```bash
-  copilot plugin marketplace add obra/superpowers-marketplace
-  ```
-
-- Install the plugin:
-
-  ```bash
-  copilot plugin install superpowers@superpowers-marketplace
-  ```
+```bash
+copilot plugin install github:evepupil/superpowers-yeton-ver
+```
 
 ## The Basic Workflow
 
@@ -236,5 +208,5 @@ MIT License - see LICENSE file for details
 Superpowers is built by [Jesse Vincent](https://blog.fsck.com) and the rest of the folks at [Prime Radiant](https://primeradiant.com).
 
 - **Discord**: [Join us](https://discord.gg/35wsABTejz) for community support, questions, and sharing what you're building with Superpowers
-- **Issues**: https://github.com/obra/superpowers/issues
+- **Issues**: https://github.com/evepupil/superpowers-yeton-ver/issues
 - **Release announcements**: [Sign up](https://primeradiant.com/superpowers/) to get notified about new versions
