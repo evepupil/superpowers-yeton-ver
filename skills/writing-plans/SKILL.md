@@ -18,6 +18,24 @@ The default output is an **Adaptive Engineering Plan**. Use a **Mechanical Hando
 **Save plans to:** `docs/superpowers/plans/YYYY-MM-DD-<feature-name>.md`
 - (User preferences for plan location override this default)
 
+## Requirement Readiness Check
+
+Before writing an implementation plan, check whether the requirements are clear enough to plan from.
+
+Look for:
+- A recent requirement analysis in `docs/superpowers/requirements/`
+- A spec from `brainstorming`
+- Product material such as PRDs, prototypes, meeting notes, user stories, or long feature descriptions
+- Clear scope, non-goals, acceptance criteria, permissions, business rules, and open questions
+
+If the task is based on scattered product material or lacks acceptance criteria, do not turn guesses into a plan. Keep the advisory short and ask whether to analyze requirements first:
+
+```text
+The requirements are not yet clear enough for a reliable implementation plan. I can first create a concise development requirement analysis covering scope, users/permissions, flows, business rules, acceptance criteria, engineering implications, and open questions. Confirm if you want me to do that before writing the plan.
+```
+
+If the human confirms, use `superpowers:analyzing-requirements` before writing the plan. If the human declines or the task is small enough to proceed, continue with the plan and carry unresolved requirement gaps into risks and open questions.
+
 ## AI Guidance Check
 
 Before writing an implementation plan, check whether the repository has project-level AI coding guidance:
@@ -193,11 +211,12 @@ These are failures in both modes:
 After writing the plan, review it with fresh eyes:
 
 1. **Spec coverage:** Can every requirement be mapped to a goal, boundary, task, or verification item?
-2. **Fact vs guess:** Are known facts separated from likely touchpoints and assumptions?
-3. **Path rigidity:** Did you avoid locking new files/directories unless the structure is already confirmed?
-4. **Risk coverage:** Are the riskiest behaviors tied to concrete verification?
-5. **Commit discipline:** Did you avoid prewriting commit messages and instead define commit boundaries?
-6. **Replan triggers:** Does the plan tell implementers when to stop and revise assumptions?
+2. **Requirement readiness:** Are missing acceptance criteria, permissions, or business rules either resolved or listed as risks/open questions?
+3. **Fact vs guess:** Are known facts separated from likely touchpoints and assumptions?
+4. **Path rigidity:** Did you avoid locking new files/directories unless the structure is already confirmed?
+5. **Risk coverage:** Are the riskiest behaviors tied to concrete verification?
+6. **Commit discipline:** Did you avoid prewriting commit messages and instead define commit boundaries?
+7. **Replan triggers:** Does the plan tell implementers when to stop and revise assumptions?
 
 Fix issues inline before handing off.
 

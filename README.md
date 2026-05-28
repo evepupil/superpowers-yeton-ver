@@ -10,7 +10,9 @@ Give your agent Superpowers with the [universal prompt installer](#option-1-prom
 
 It starts from the moment you fire up your coding agent. As soon as it sees that you're building something, it *doesn't* just jump into trying to write code. Instead, it steps back and asks you what you're really trying to do. 
 
-Once it's teased a spec out of the conversation, it shows it to you in chunks short enough to actually read and digest. 
+Once it's teased a spec out of the conversation, it shows it to you in chunks short enough to actually read and digest.
+
+When work starts from PRDs, prototypes, meeting notes, user stories, or long product descriptions, it can first turn that material into a development-ready requirement analysis: scope, users, permissions, flows, business rules, acceptance criteria, engineering implications, and open questions.
 
 After you've signed off on the design, your agent puts together an adaptive engineering plan. The plan fixes the goal, boundaries, risks, likely touchpoints, and verification strategy without pretending the final file layout or implementation code is knowable before inspecting the live code. It emphasizes YAGNI (You Aren't Gonna Need It), DRY, and risk-driven verification.
 
@@ -59,7 +61,7 @@ https://github.com/evepupil/superpowers-yeton-ver
 5. 如果当前工具需要配置文件，请自动找到或创建对应配置文件，并只做最小修改。
 6. 如果当前工具需要用户通过 UI 点确认，请告诉我要点哪里。
 7. 安装完成后告诉我是否需要重启当前工具。
-8. 重启后帮我验证是否能看到 Yeton 版新增 skill，例如 creating-agents-guidance、qa-testing-workflow、qa-risk-review。
+8. 重启后帮我验证是否能看到 Yeton 版新增 skill，例如 analyzing-requirements、creating-agents-guidance、qa-testing-workflow、qa-risk-review。
 9. 如果你不确定当前工具的安装命令，请先读取这个仓库 README 或对应安装文档，再执行。
 ```
 
@@ -80,7 +82,8 @@ Before installing this fork:
    entry.
 3. Restart the harness after installation.
 4. Verify the fork loaded by checking for fork-specific skills such as
-   `creating-agents-guidance`, `qa-testing-workflow`, or `qa-risk-review`.
+   `analyzing-requirements`, `creating-agents-guidance`,
+   `qa-testing-workflow`, or `qa-risk-review`.
 
 #### Claude Code
 
@@ -187,17 +190,19 @@ copilot plugin install github:evepupil/superpowers-yeton-ver
 
 1. **brainstorming** - Activates before writing code. Refines rough ideas through questions, explores alternatives, presents design in sections for validation. Saves design document.
 
-2. **using-git-worktrees** - Activates after design approval. Creates isolated workspace on new branch, runs project setup, verifies clean test baseline.
+2. **analyzing-requirements** - Activates when development starts from PRDs, prototypes, meeting notes, user stories, or long feature descriptions. Produces development-ready requirement analysis before planning.
 
-3. **writing-plans** - Activates with approved design. Creates an adaptive engineering plan with goals, boundaries, known context, likely touchpoints, risks, and verification strategy. Mechanical step-by-step handoff plans are opt-in.
+3. **using-git-worktrees** - Activates after design approval. Creates isolated workspace on new branch, runs project setup, verifies clean test baseline.
 
-4. **subagent-driven-development** or **executing-plans** - Activates with plan. Dispatches fresh subagent per task with two-stage review (spec compliance, then code quality), or executes in batches with human checkpoints.
+4. **writing-plans** - Activates with approved design or requirement analysis. Creates an adaptive engineering plan with goals, boundaries, known context, likely touchpoints, risks, and verification strategy. Mechanical step-by-step handoff plans are opt-in.
 
-5. **test-driven-development** - Activates during implementation when behavior changes need test-first development. It enforces RED-GREEN-REFACTOR for those changes; plans still choose verification by risk rather than forcing low-value mock tests everywhere.
+5. **subagent-driven-development** or **executing-plans** - Activates with plan. Dispatches fresh subagent per task with two-stage review (spec compliance, then code quality), or executes in batches with human checkpoints.
 
-6. **requesting-code-review** - Activates between tasks. Reviews against plan, reports issues by severity. Critical issues block progress.
+6. **test-driven-development** - Activates during implementation when behavior changes need test-first development. It enforces RED-GREEN-REFACTOR for those changes; plans still choose verification by risk rather than forcing low-value mock tests everywhere.
 
-7. **finishing-a-development-branch** - Activates when tasks complete. Verifies tests, presents options (merge/PR/keep/discard), cleans up worktree.
+7. **requesting-code-review** - Activates between tasks. Reviews against plan, reports issues by severity. Critical issues block progress.
+
+8. **finishing-a-development-branch** - Activates when tasks complete. Verifies tests, presents options (merge/PR/keep/discard), cleans up worktree.
 
 **The agent checks for relevant skills before any task.** Mandatory workflows, not suggestions.
 
@@ -221,6 +226,7 @@ copilot plugin install github:evepupil/superpowers-yeton-ver
 
 **Collaboration** 
 - **brainstorming** - Socratic design refinement
+- **analyzing-requirements** - Development-ready requirement analysis before planning
 - **writing-plans** - Adaptive engineering plans
 - **executing-plans** - Batch execution with checkpoints
 - **dispatching-parallel-agents** - Concurrent subagent workflows
