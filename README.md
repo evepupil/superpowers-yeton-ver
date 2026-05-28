@@ -4,7 +4,7 @@ Superpowers is a complete software development methodology for your coding agent
 
 ## Quickstart
 
-Give your agent Superpowers: [Claude Code](#claude-code), [Codex CLI](#codex-cli), [Codex App](#codex-app), [Factory Droid](#factory-droid), [Gemini CLI](#gemini-cli), [OpenCode](#opencode), [Cursor](#cursor), [GitHub Copilot CLI](#github-copilot-cli).
+Give your agent Superpowers with the [universal prompt installer](#option-1-prompt-install), or use the [manual install](#option-2-manual-install) for your specific AI coding tool.
 
 ## How it works
 
@@ -32,7 +32,40 @@ Thanks!
 
 Installation differs by harness. If you use more than one, install Superpowers separately for each one.
 
-### Replacing the Official Superpowers Plugin
+### Option 1: Prompt Install
+
+Paste this prompt into your AI coding tool and let it install Superpowers Yeton
+for its own environment:
+
+```text
+请帮我把 Superpowers Yeton 版安装到当前 AI 编程工具中。
+
+仓库地址：
+https://github.com/evepupil/superpowers-yeton-ver
+
+要求：
+1. 先识别我当前使用的 AI 编程工具，例如 Claude Code、Codex CLI、Codex App、Factory Droid、Gemini CLI、OpenCode、Cursor 或 GitHub Copilot CLI。
+2. 根据当前工具选择正确安装方式：
+   - Claude Code: /plugin install github:evepupil/superpowers-yeton-ver
+   - Codex CLI: 打开 /plugins，添加 https://github.com/evepupil/superpowers-yeton-ver，然后安装插件
+   - Codex App: 在 Plugins 里添加 https://github.com/evepupil/superpowers-yeton-ver 并安装
+   - Factory Droid: 先运行 droid plugin marketplace add https://github.com/evepupil/superpowers-yeton-ver，再运行 droid plugin install superpowers@superpowers
+   - Gemini CLI: gemini extensions install https://github.com/evepupil/superpowers-yeton-ver
+   - OpenCode: 修改 opencode.json 的顶层 plugin 数组，添加 superpowers@git+https://github.com/evepupil/superpowers-yeton-ver.git
+   - Cursor: /add-plugin https://github.com/evepupil/superpowers-yeton-ver
+   - GitHub Copilot CLI: copilot plugin install github:evepupil/superpowers-yeton-ver
+3. 如果已经安装官方 Superpowers，或者配置里存在 github.com/obra/superpowers，请先卸载、禁用或替换为 Yeton 版，避免同名 superpowers 插件冲突。
+4. 保留我已有的其他插件、MCP、模型和项目配置，只修改 superpowers 相关配置。
+5. 如果当前工具需要配置文件，请自动找到或创建对应配置文件，并只做最小修改。
+6. 如果当前工具需要用户通过 UI 点确认，请告诉我要点哪里。
+7. 安装完成后告诉我是否需要重启当前工具。
+8. 重启后帮我验证是否能看到 Yeton 版新增 skill，例如 creating-agents-guidance、qa-testing-workflow、qa-risk-review。
+9. 如果你不确定当前工具的安装命令，请先读取这个仓库 README 或对应安装文档，再执行。
+```
+
+### Option 2: Manual Install
+
+#### Replacing the Official Superpowers Plugin
 
 This fork keeps the plugin name `superpowers`, so install it as a replacement
 for the official package. Do not keep both the official `obra/superpowers`
@@ -49,7 +82,7 @@ Before installing this fork:
 4. Verify the fork loaded by checking for fork-specific skills such as
    `creating-agents-guidance`, `qa-testing-workflow`, or `qa-risk-review`.
 
-### Claude Code
+#### Claude Code
 
 Install this fork directly from GitHub:
 
@@ -57,7 +90,7 @@ Install this fork directly from GitHub:
 /plugin install github:evepupil/superpowers-yeton-ver
 ```
 
-### Codex CLI
+#### Codex CLI
 
 Install this fork from its GitHub repository.
 
@@ -75,7 +108,7 @@ Install this fork from its GitHub repository.
 
 - Select `Install Plugin`.
 
-### Codex App
+#### Codex App
 
 Install this fork from its GitHub repository.
 
@@ -83,7 +116,7 @@ Install this fork from its GitHub repository.
 - Add or install from `https://github.com/evepupil/superpowers-yeton-ver`.
 - Follow the prompts.
 
-### Factory Droid
+#### Factory Droid
 
 - Register the marketplace:
 
@@ -97,7 +130,7 @@ Install this fork from its GitHub repository.
   droid plugin install superpowers@superpowers
   ```
 
-### Gemini CLI
+#### Gemini CLI
 
 - Install the extension:
 
@@ -111,12 +144,10 @@ Install this fork from its GitHub repository.
   gemini extensions update superpowers
   ```
 
-### OpenCode
+#### OpenCode
 
 OpenCode uses its own `opencode.json` plugin config. Install Superpowers
 separately even if you already use it in another harness.
-
-#### Manual Install
 
 Edit your OpenCode config file:
 
@@ -134,28 +165,9 @@ Add or update the top-level `plugin` array:
 If an official Superpowers entry already exists, replace it with the fork URL
 above. Keep only one `superpowers` plugin entry enabled, then restart OpenCode.
 
-#### Prompt Install
-
-Paste this into OpenCode and let it update its own config:
-
-```text
-请帮我安装 Superpowers Yeton 版 OpenCode 插件。
-
-要求：
-1. 找到或创建 OpenCode 全局配置文件：
-   - Windows: %USERPROFILE%\.config\opencode\opencode.json
-   - macOS/Linux: ~/.config/opencode/opencode.json
-2. 保留配置文件里已有的其他配置。
-3. 在顶层 plugin 数组中安装：
-   superpowers@git+https://github.com/evepupil/superpowers-yeton-ver.git
-4. 如果已经存在官方 superpowers 插件源，例如 github.com/obra/superpowers，请替换成上面的 Yeton 版源。
-5. 确保最终只保留一个 superpowers 插件条目。
-6. 修改完成后告诉我需要重启 OpenCode，并说明如何验证是否安装成功。
-```
-
 - Detailed docs: [docs/README.opencode.md](docs/README.opencode.md)
 
-### Cursor
+#### Cursor
 
 - In Cursor Agent chat, install this fork directly from GitHub:
 
@@ -163,7 +175,7 @@ Paste this into OpenCode and let it update its own config:
   /add-plugin https://github.com/evepupil/superpowers-yeton-ver
   ```
 
-### GitHub Copilot CLI
+#### GitHub Copilot CLI
 
 Install this fork directly from GitHub:
 
