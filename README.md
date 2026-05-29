@@ -63,7 +63,7 @@ https://github.com/evepupil/superpowers-yeton-ver
 5. 如果当前工具需要配置文件，请自动找到或创建对应配置文件，并只做最小修改。
 6. 如果当前工具需要用户通过 UI 点确认，请告诉我要点哪里。
 7. 安装完成后告诉我是否需要重启当前工具。
-8. 重启后帮我验证是否能看到 Yeton 版新增 skill，例如 analyzing-requirements、creating-agents-guidance、qa-testing-workflow、qa-risk-review。
+8. 重启后帮我验证是否能看到 Yeton 版新增 skill，例如 executing-roadmap、managing-project-roadmap、analyzing-requirements、creating-agents-guidance、qa-testing-workflow、qa-risk-review。
 9. 如果你不确定当前工具的安装命令，请先读取这个仓库 README 或对应安装文档，再执行。
 ```
 
@@ -84,6 +84,7 @@ Before installing this fork:
    entry.
 3. Restart the harness after installation.
 4. Verify the fork loaded by checking for fork-specific skills such as
+   `executing-roadmap`, `managing-project-roadmap`,
    `analyzing-requirements`, `creating-agents-guidance`,
    `qa-testing-workflow`, or `qa-risk-review`.
 
@@ -190,23 +191,25 @@ copilot plugin install github:evepupil/superpowers-yeton-ver
 
 ## The Basic Workflow
 
-1. **brainstorming** - Activates before writing code. Refines rough ideas through questions, explores alternatives, presents design in sections for validation. Saves design document.
+1. **executing-roadmap** - Optional roadmap execution entry point. Reads `docs/superpowers/roadmap.md`, chooses one or more items, routes through planning, development, verification, roadmap update, and commit.
 
-2. **managing-project-roadmap** - Maintains project-level direction, milestones, backlog, risks, progress, and next steps in `docs/superpowers/roadmap.md`.
+2. **brainstorming** - Activates before writing code. Refines rough ideas through questions, explores alternatives, presents design in sections for validation. Saves design document.
 
-3. **analyzing-requirements** - Activates when development starts from PRDs, prototypes, meeting notes, user stories, or long feature descriptions. Produces development-ready requirement analysis before planning.
+3. **managing-project-roadmap** - Maintains project-level direction, milestones, backlog, risks, progress, and next steps in `docs/superpowers/roadmap.md`.
 
-4. **using-git-worktrees** - Activates after design approval. Creates isolated workspace on new branch, runs project setup, verifies clean test baseline.
+4. **analyzing-requirements** - Activates when development starts from PRDs, prototypes, meeting notes, user stories, or long feature descriptions. Produces development-ready requirement analysis before planning.
 
-5. **writing-plans** - Activates with approved design or requirement analysis. Links to the roadmap when present, then creates an adaptive engineering plan with goals, boundaries, known context, likely touchpoints, risks, and verification strategy.
+5. **using-git-worktrees** - Activates after design approval. Creates isolated workspace on new branch, runs project setup, verifies clean test baseline.
 
-6. **subagent-driven-development** or **executing-plans** - Activates with plan. Dispatches fresh subagent per task with two-stage review (spec compliance, then code quality), or executes in batches with human checkpoints.
+6. **writing-plans** - Activates with approved design or requirement analysis. Links to the roadmap when present, then creates an adaptive engineering plan with goals, boundaries, known context, likely touchpoints, risks, and verification strategy.
 
-7. **test-driven-development** - Activates during implementation when behavior changes need test-first development. It enforces RED-GREEN-REFACTOR for those changes; plans still choose verification by risk rather than forcing low-value mock tests everywhere.
+7. **subagent-driven-development** or **executing-plans** - Activates with plan. Dispatches fresh subagent per task with two-stage review (spec compliance, then code quality), or executes in batches with human checkpoints.
 
-8. **requesting-code-review** - Activates between tasks. Reviews against plan, reports issues by severity. Critical issues block progress.
+8. **test-driven-development** - Activates during implementation when behavior changes need test-first development. It enforces RED-GREEN-REFACTOR for those changes; plans still choose verification by risk rather than forcing low-value mock tests everywhere.
 
-9. **verification-before-completion** and **finishing-a-development-branch** - Verify completion, update roadmap when project-level progress changes, then present merge/PR/keep/discard options.
+9. **requesting-code-review** - Activates between tasks. Reviews against plan, reports issues by severity. Critical issues block progress.
+
+10. **verification-before-completion** and **finishing-a-development-branch** - Verify completion, update roadmap when project-level progress changes, then present merge/PR/keep/discard options.
 
 **The agent checks for relevant skills before any task.** Mandatory workflows, not suggestions.
 
@@ -232,6 +235,7 @@ copilot plugin install github:evepupil/superpowers-yeton-ver
 - **verification-before-completion** - Ensure it's actually fixed
 
 **Collaboration** 
+- **executing-roadmap** - Roadmap-driven execution entry point with guided and autopilot modes
 - **brainstorming** - Socratic design refinement
 - **managing-project-roadmap** - Project-level roadmap, progress, backlog, and next-step tracking
 - **analyzing-requirements** - Development-ready requirement analysis before planning
