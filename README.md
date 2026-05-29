@@ -224,6 +224,9 @@ copilot plugin install github:evepupil/superpowers-yeton-ver
 - **qa-api-test-design** - Optional API test design when code or API docs are available
 - **qa-risk-review** - QA-focused review of code changes and test risk
 
+**Personal Context**
+- **personal-info-cloudmind** - Optional CloudMind-backed personal memory lookup for user preferences, history, project context, and prior decisions
+
 **Debugging**
 - **systematic-debugging** - 4-phase root cause process (includes root-cause-tracing, defense-in-depth, condition-based-waiting techniques)
 - **verification-before-completion** - Ensure it's actually fixed

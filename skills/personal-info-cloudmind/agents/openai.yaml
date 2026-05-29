@@ -1,0 +1,13 @@
+interface:
+  display_name: "CloudMind Personal Context"
+  short_description: "Use CloudMind for personal-context lookups"
+  default_prompt: "Use $personal-info-cloudmind when a user-specific personal fact, preference, project context, or history is needed but not known."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "cloudmind"
+      description: "CloudMind personal memory and asset retrieval MCP server"
+
+policy:
+  allow_implicit_invocation: true
