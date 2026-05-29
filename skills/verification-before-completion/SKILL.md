@@ -29,13 +29,25 @@ BEFORE claiming any status or expressing satisfaction:
 1. IDENTIFY: What command proves this claim?
 2. RUN: Execute the FULL command (fresh, complete)
 3. READ: Full output, check exit code, count failures
-4. VERIFY: Does output confirm the claim?
+4. ROADMAP: If docs/superpowers/roadmap.md exists, check whether completed work needs a roadmap update
+5. VERIFY: Does output confirm the claim?
    - If NO: State actual status with evidence
    - If YES: State claim WITH evidence
-5. ONLY THEN: Make the claim
+6. ONLY THEN: Make the claim
 
 Skip any step = lying, not verifying
 ```
+
+## Roadmap Check
+
+Before reporting substantial feature work complete, check for `docs/superpowers/roadmap.md`.
+
+If it exists:
+- Use `superpowers:managing-project-roadmap` to decide whether the completed work changes project-level progress.
+- Update the roadmap only when the work affects a milestone, active work, next steps, risks, decisions, or meaningful recent progress.
+- Do not add tiny/local changes as new roadmap items.
+
+If it does not exist, do not block completion. For substantial feature work, mention once that a roadmap would help future sessions track project progress beyond recent context.
 
 ## Common Failures
 

@@ -12,7 +12,9 @@ It starts from the moment you fire up your coding agent. As soon as it sees that
 
 Once it's teased a spec out of the conversation, it shows it to you in chunks short enough to actually read and digest.
 
-When work starts from PRDs, prototypes, meeting notes, user stories, or long product descriptions, it can first turn that material into a development-ready requirement analysis: scope, users, permissions, flows, business rules, acceptance criteria, engineering implications, and open questions.
+For long-running projects, it can maintain `docs/superpowers/roadmap.md` as a project-level map: product goal, current phase, milestones, backlog, risks, decisions, recent progress, and next recommended steps. Feature plans stay tactical; the roadmap keeps the project from drifting toward only the most recent context.
+
+When work starts from PRDs, prototypes, meeting notes, user stories, or long product descriptions, it can turn that material into a development-ready requirement analysis for the current feature: scope, users, permissions, flows, business rules, acceptance criteria, engineering implications, and open questions.
 
 After you've signed off on the design, your agent puts together an adaptive engineering plan. The plan fixes the goal, boundaries, risks, likely touchpoints, and verification strategy without pretending the final file layout or implementation code is knowable before inspecting the live code. It emphasizes YAGNI (You Aren't Gonna Need It), DRY, and risk-driven verification.
 
@@ -190,19 +192,21 @@ copilot plugin install github:evepupil/superpowers-yeton-ver
 
 1. **brainstorming** - Activates before writing code. Refines rough ideas through questions, explores alternatives, presents design in sections for validation. Saves design document.
 
-2. **analyzing-requirements** - Activates when development starts from PRDs, prototypes, meeting notes, user stories, or long feature descriptions. Produces development-ready requirement analysis before planning.
+2. **managing-project-roadmap** - Maintains project-level direction, milestones, backlog, risks, progress, and next steps in `docs/superpowers/roadmap.md`.
 
-3. **using-git-worktrees** - Activates after design approval. Creates isolated workspace on new branch, runs project setup, verifies clean test baseline.
+3. **analyzing-requirements** - Activates when development starts from PRDs, prototypes, meeting notes, user stories, or long feature descriptions. Produces development-ready requirement analysis before planning.
 
-4. **writing-plans** - Activates with approved design or requirement analysis. Creates an adaptive engineering plan with goals, boundaries, known context, likely touchpoints, risks, and verification strategy. Mechanical step-by-step handoff plans are opt-in.
+4. **using-git-worktrees** - Activates after design approval. Creates isolated workspace on new branch, runs project setup, verifies clean test baseline.
 
-5. **subagent-driven-development** or **executing-plans** - Activates with plan. Dispatches fresh subagent per task with two-stage review (spec compliance, then code quality), or executes in batches with human checkpoints.
+5. **writing-plans** - Activates with approved design or requirement analysis. Links to the roadmap when present, then creates an adaptive engineering plan with goals, boundaries, known context, likely touchpoints, risks, and verification strategy.
 
-6. **test-driven-development** - Activates during implementation when behavior changes need test-first development. It enforces RED-GREEN-REFACTOR for those changes; plans still choose verification by risk rather than forcing low-value mock tests everywhere.
+6. **subagent-driven-development** or **executing-plans** - Activates with plan. Dispatches fresh subagent per task with two-stage review (spec compliance, then code quality), or executes in batches with human checkpoints.
 
-7. **requesting-code-review** - Activates between tasks. Reviews against plan, reports issues by severity. Critical issues block progress.
+7. **test-driven-development** - Activates during implementation when behavior changes need test-first development. It enforces RED-GREEN-REFACTOR for those changes; plans still choose verification by risk rather than forcing low-value mock tests everywhere.
 
-8. **finishing-a-development-branch** - Activates when tasks complete. Verifies tests, presents options (merge/PR/keep/discard), cleans up worktree.
+8. **requesting-code-review** - Activates between tasks. Reviews against plan, reports issues by severity. Critical issues block progress.
+
+9. **verification-before-completion** and **finishing-a-development-branch** - Verify completion, update roadmap when project-level progress changes, then present merge/PR/keep/discard options.
 
 **The agent checks for relevant skills before any task.** Mandatory workflows, not suggestions.
 
@@ -226,6 +230,7 @@ copilot plugin install github:evepupil/superpowers-yeton-ver
 
 **Collaboration** 
 - **brainstorming** - Socratic design refinement
+- **managing-project-roadmap** - Project-level roadmap, progress, backlog, and next-step tracking
 - **analyzing-requirements** - Development-ready requirement analysis before planning
 - **writing-plans** - Adaptive engineering plans
 - **executing-plans** - Batch execution with checkpoints

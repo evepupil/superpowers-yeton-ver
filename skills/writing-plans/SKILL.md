@@ -18,6 +18,24 @@ The default output is an **Adaptive Engineering Plan**. Use a **Mechanical Hando
 **Save plans to:** `docs/superpowers/plans/YYYY-MM-DD-<feature-name>.md`
 - (User preferences for plan location override this default)
 
+## Roadmap Check
+
+Before writing an implementation plan, check for `docs/superpowers/roadmap.md`.
+
+If it exists:
+- Read it before planning.
+- Identify the milestone or roadmap item this feature belongs to.
+- If the feature does not fit the roadmap, ask whether to add it to roadmap `Inbox` as `proposed` before planning.
+- Add a `Roadmap Link` section to the plan.
+
+If it does not exist and this is substantial project work, keep the advisory short and non-blocking:
+
+```text
+I don't see `docs/superpowers/roadmap.md`. For ongoing AI-assisted development, a roadmap helps future sessions know the project goal, current phase, completed work, backlog, and next steps beyond recent chat context. Confirm if you want me to create a lightweight roadmap before this plan.
+```
+
+If the human confirms, use `superpowers:managing-project-roadmap` before writing the plan. If the human declines or the change is small, proceed and do not block planning.
+
 ## Requirement Readiness Check
 
 Before writing an implementation plan, check whether the requirements are clear enough to plan from.
@@ -98,6 +116,19 @@ Every adaptive plan MUST start with this header:
 ```
 
 ## Required Sections
+
+### Roadmap Link
+
+Include this section when a roadmap exists or the work should be tracked at project level:
+
+```markdown
+## Roadmap Link
+- Milestone: [roadmap milestone ID/name, or "Not linked"]
+- Roadmap item: [active/backlog/inbox item, or "Not linked"]
+- Completion update required: yes/no
+```
+
+Use `Completion update required: no` for tiny/local changes that do not affect project-level progress. Do not create new roadmap items for every small feature.
 
 ### Goal and Boundaries
 
@@ -211,12 +242,13 @@ These are failures in both modes:
 After writing the plan, review it with fresh eyes:
 
 1. **Spec coverage:** Can every requirement be mapped to a goal, boundary, task, or verification item?
-2. **Requirement readiness:** Are missing acceptance criteria, permissions, or business rules either resolved or listed as risks/open questions?
-3. **Fact vs guess:** Are known facts separated from likely touchpoints and assumptions?
-4. **Path rigidity:** Did you avoid locking new files/directories unless the structure is already confirmed?
-5. **Risk coverage:** Are the riskiest behaviors tied to concrete verification?
-6. **Commit discipline:** Did you avoid prewriting commit messages and instead define commit boundaries?
-7. **Replan triggers:** Does the plan tell implementers when to stop and revise assumptions?
+2. **Roadmap linkage:** If roadmap exists, did you link this feature to a milestone/item or explicitly mark it unlinked?
+3. **Requirement readiness:** Are missing acceptance criteria, permissions, or business rules either resolved or listed as risks/open questions?
+4. **Fact vs guess:** Are known facts separated from likely touchpoints and assumptions?
+5. **Path rigidity:** Did you avoid locking new files/directories unless the structure is already confirmed?
+6. **Risk coverage:** Are the riskiest behaviors tied to concrete verification?
+7. **Commit discipline:** Did you avoid prewriting commit messages and instead define commit boundaries?
+8. **Replan triggers:** Does the plan tell implementers when to stop and revise assumptions?
 
 Fix issues inline before handing off.
 
